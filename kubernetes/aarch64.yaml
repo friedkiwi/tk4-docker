@@ -1,0 +1,76 @@
+#
+# Service description for a admin UI and tn3270 LoadBalancer
+#
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: k8s-tk4-lb
+spec:
+  selector:
+    app: k8s-tk4
+  ports:
+    - protocol: TCP
+      port: 3270
+      targetPort: 3270
+      name: tn3270
+    - protocol: TCP
+      port: 8038
+      targetPort: 8038
+      name: adminui
+  type: LoadBalancer
+
+#
+# Persistent volume to store the DASD 
+#
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: k8s-tk4
+  name: k8s-tk4-dasd-claim
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
+
+#
+# Actual tk4-docker deployment for k8s
+# 
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8s-tk4
+  labels:
+    app: k8s-tk4
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: k8s-tk4
+  template:
+    metadata:
+      labels:
+        app: k8s-tk4
+    spec:
+      containers:
+      - name: mvs38-tk4-hercules
+        image: friedkiwi/tk4-docker:latest-aarch64
+        imagePullPolicy: Always
+        ports:
+          - containerPort: 8038
+          - containerPort: 3270
+        volumeMounts:
+        - name: k8s-tk4-dasd
+          mountPath: /dasd/shadow
+      volumes:
+      - name: k8s-tk4-dasd
+        persistentVolumeClaim:
+          claimName: k8s-tk4-dasd-claim
