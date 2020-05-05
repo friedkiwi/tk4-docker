@@ -1,0 +1,90 @@
+#**********************************************************************
+#***                                                                ***
+#*** File:    tk4-.cnf                                              ***
+#***                                                                ***
+#*** Purpose: Hercules configuration file for MVS 3.8j TK4-         ***
+#***                                                                ***
+#*** Updated: 2020/05/05                                            ***
+#**                                                                 ***
+#*** Modified by @friedkiwi for use with Docker containers          ***
+#***                                                                ***
+#**********************************************************************
+CPUSERIAL 000611
+CPUMODEL 3033
+MAINSIZE 16
+XPNDSIZE 0
+CNSLPORT 3270
+HTTPPORT 8038
+NUMCPU 1
+TZOFFSET +0000
+ARCHMODE S/370
+OSTAILOR QUIET
+DIAG8CMD ENABLE ECHO
+
+0002 3211 /tmp/prt002.txt 
+000E 1403 /tmp/prt00e.txt 
+000C 3505 3505 sockdev ascii trunc eof
+000D 3525 /tmp/dummy ascii
+0480 3420 *
+010C 3505 /tmp/dummy eof ascii trunc
+010D 3525 /tmp/pch10d.txt ascii
+000F 1403 /tmp/prt00f.txt
+030E 1403 /tmp/hardcopy.log 
+
+0009 3215-C
+
+#
+# local 3270 devices (VTAM)
+#
+00C0 3270
+00C1 3270
+00C2 3270
+00C3 3270
+00C4 3270
+00C5 3270
+00C6 3270
+00C7 3287
+#
+# local 3270 terminals (TCAM)
+#
+03C0 3270 TCAM
+03C1 3270 TCAM
+03C2 3270 TCAM
+03C3 3270 TCAM
+03C4 3270 TCAM
+03C5 3270 TCAM
+03C6 3270 TCAM
+03C7 3270 TCAM
+
+#
+# TK4- DASD
+#
+
+0152 3330 /dasd/hasp00.152 sf=/dasd/shadow/hasp00_152_
+0191 3390 /dasd/mvscat.191 sf=/dasd/shadow/mvscat_191_
+0248 3350 /dasd/mvsdlb.248 sf=/dasd/shadow/mvsdlb_248_
+0148 3350 /dasd/mvsres.148 sf=/dasd/shadow/mvsres_148_
+0160 3340 /dasd/page00.160 sf=/dasd/shadow/page00_160_
+0161 3340 /dasd/page01.161 sf=/dasd/shadow/page01_161_
+0240 3350 /dasd/pub000.240 sf=/dasd/shadow/pub000_240_
+0241 3350 /dasd/pub010.241 sf=/dasd/shadow/pub010_241_
+0270 3375 /dasd/pub001.270 sf=/dasd/shadow/pub001_270_
+0271 3375 /dasd/pub011.271 sf=/dasd/shadow/pub011_271_
+0280 3380 /dasd/pub002.280 sf=/dasd/shadow/pub002_280_
+0281 3380 /dasd/pub012.281 sf=/dasd/shadow/pub012_281_
+0290 3390 /dasd/pub003.290 sf=/dasd/shadow/pub003_290_
+0291 3390 /dasd/pub013.291 sf=/dasd/shadow/pub013_291_
+0149 3350 /dasd/smp001.149 sf=/dasd/shadow/smp001_149_
+014a 3350 /dasd/smp002.14a sf=/dasd/shadow/smp002_14a_
+014b 3350 /dasd/smp003.14b sf=/dasd/shadow/smp003_14b_
+014c 3350 /dasd/smp004.14c sf=/dasd/shadow/smp004_14c_
+0131 2314 /dasd/sort01.131 sf=/dasd/shadow/sort01_131_
+0132 2314 /dasd/sort02.132 sf=/dasd/shadow/sort02_132_
+0133 2314 /dasd/sort03.133 sf=/dasd/shadow/sort03_133_
+0134 2314 /dasd/sort04.134 sf=/dasd/shadow/sort04_134_
+0135 2314 /dasd/sort05.135 sf=/dasd/shadow/sort05_135_
+0136 2314 /dasd/sort06.136 sf=/dasd/shadow/sort06_136_
+0140 3350 /dasd/work00.140 sf=/dasd/shadow/work00_140_
+0170 3375 /dasd/work01.170 sf=/dasd/shadow/work01_170_
+0180 3380 /dasd/work02.180 sf=/dasd/shadow/work02_180_
+0190 3390 /dasd/work03.190 sf=/dasd/shadow/work03_190_
