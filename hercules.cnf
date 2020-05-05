@@ -31,7 +31,7 @@ DIAG8CMD ENABLE ECHO
 000F 1403 /tmp/prt00f.txt
 030E 1403 /tmp/hardcopy.log 
 
-0009 3215-C
+0009 3270 CONS
 
 #
 # local 3270 devices (VTAM)
